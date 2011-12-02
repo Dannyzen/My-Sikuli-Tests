@@ -1,0 +1,303 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Corp_site_Screen_Shot.sikuli</h2> <a href="Corp_site_Screen_Shot.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">#settings
+</span>Screen=Screen(<span class="dig">1</span>)<span class="cmt">#Change 1 to 0 if using only 1 monitor</span>
+<span class="cmt">#Variables
+</span>myApp = App(<span class="str">"Firefox"</span>)
+baseurl = <span class="str">"http://www.buddymedia.com"</span> <span class="cmt">#This is the base URL</span>
+found = <span class="str">" image found"</span>
+notfound = <span class="str">" image not found"</span>
+products_menu = <span class="dig">0</span>
+solutions_menu = <span class="dig">0</span>
+services_menu = <span class="dig">0</span>
+clients_menu = <span class="dig">0</span>
+resources_menu = <span class="dig">0</span>
+
+products_menu_total = <span class="dig">0</span>
+solutions_menu_total = <span class="dig">0</span>
+services_menu_total = <span class="dig">0</span>
+clients_menu_total = <span class="dig">0</span>
+resources_menu_total = <span class="dig">0</span>
+
+
+<span class="kw">if</span> <span class="kw">not</span> myApp.window(): <span class="cmt"># no window(0) - Firefox not open</span>
+        App.open(<span class="str">"c:\\Program Files\\Mozilla Firefox\\Firefox.exe"</span>) <span class="cmt"># Windoze</span>
+        <span class="skw">wait</span>(<span class="dig">2</span>)
+myApp.focus()
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="skw">type</span>(<span class="str">"l"</span>, KEY_CMD) <span class="cmt"># switch to address field in firefox / chrome / safari. Need to add in conditional using F6 in IE</span>
+<span class="skw">type</span>(baseurl + <span class="str">"\n"</span>)
+
+<span class="cmt">#this test assures that all the images in the product menu exist.
+</span><span class="kw">if</span> Screen.exists(<img src="PRODUCTS-2.png" />):
+    Screen.<span class="skw">click</span> (<img src="PRODUCTS-2.png" />)
+    <span class="kw">if</span> Screen.exists(<img src="ALLPRODUCTS-6.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"All product"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"All product"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="CONVERSATION-1.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"ConversationBuddy"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"ConversationBuddy"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="PROFILEBLJDD.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"ProfileBuddy"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"ProfileBuddy"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="CONVERSIONBU.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"ConversionBuddy"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"conversionBuddy"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    exit
+    <span class="kw">if</span> Screen.exists(<img src="REACHBUDDY.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"ReachBuddy"</span> + found
+
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"reachBuddy"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="ANALYTICS.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Analytics"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Analytics"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="DASHBOARD.png" />):
+        products_menu = products_menu + <span class="dig">1</span>
+        products_menu_total = products_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Dashboard"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Dashboard"</span> + notfound
+            products_menu_total = products_menu_total + <span class="dig">1</span>
+            exit
+
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"products menu"</span> + notfound
+<span class="cmt">#output what worked and what did not work
+</span><span class="kw">print</span> products_menu, <span class="str">"out of "</span>, products_menu_total, <span class="str">" works"</span>
+
+<span class="cmt">#this test assures that all the images in the solutions menu exist.
+</span>
+<span class="kw">if</span> Screen.exists(<img src="SOLUTIONS.png" />):
+    Screen.<span class="skw">click</span> (<img src="SOLUTIONS.png" />)
+    <span class="kw">if</span> Screen.exists(<img src="ALLSOLUTIONS.png" />):
+        solutions_menu = solutions_menu + <span class="dig">1</span>
+        solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Solutions"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Solutions"</span> + notfound
+            solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="CHALLENGESSO.png" />):
+        solutions_menu = solutions_menu + <span class="dig">1</span>
+        solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Challenges + solutions"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"challenges + solutions"</span> + notfound
+            solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="CASESTUDIES.png" />):
+        solutions_menu = solutions_menu + <span class="dig">1</span>
+        solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Case studies"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"casestudies"</span> + notfound
+            solutions_menu_total = solutions_menu_total + <span class="dig">1</span>
+            exit
+
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"solutions menu"</span> + notfound
+
+<span class="kw">print</span> solutions_menu, <span class="str">"out of "</span>, solutions_menu_total, <span class="str">" works"</span>
+
+<span class="cmt">#this test assures that all the images in the services menu exist.
+</span><span class="kw">if</span> Screen.exists(<img src="SERVICES.png" />):
+    Screen.<span class="skw">click</span> (<img src="SERVICES.png" />)
+    <span class="kw">if</span> Screen.exists(<img src="BUDDYMEDIAUN.png" />):
+        services_menu = services_menu + <span class="dig">1</span>
+        services_menu_total = services_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Buddy Media University"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Buddy Media University"</span> + notfound
+            services_menu_total = services_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="SUPPORT.png" />):
+        services_menu = services_menu + <span class="dig">1</span>
+        services_menu_total = services_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Support"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Support"</span> + notfound
+            services_menu_total = services_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="DEVELOPMENTP.png" />):
+        services_menu = services_menu + <span class="dig">1</span>
+        services_menu_total = services_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Development Platform"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Development Platform"</span> + notfound
+            services_menu_total = services_menu_total + <span class="dig">1</span>
+            exit
+
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"services menu"</span> + notfound
+
+<span class="kw">print</span> services_menu, <span class="str">"out of "</span>, services_menu_total, <span class="str">" works"</span>
+
+<span class="cmt">#this test assures that all the images in the clients menu exist.
+</span>
+<span class="kw">if</span> Screen.exists(<img src="CLIENTS.png" />):
+    Screen.<span class="skw">click</span> (<img src="CLIENTS.png" />)
+    <span class="kw">if</span> Screen.exists(<img src="ALLCLIENTS.png" />):
+        clients_menu = clients_menu + <span class="dig">1</span>
+        clients_menu_total = clients_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"All Clients"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"All Clients"</span> + notfound
+            clients_menu_total = clients_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="CLIENTSBYIND-2.png" />):
+        clients_menu = clients_menu + <span class="dig">1</span>
+        clients_menu_total = clients_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Clients by industry"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Clients by industry"</span> + notfound
+            clients_menu_total = clients_menu_total + <span class="dig">1</span>
+            exit
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"clients menu"</span> + notfound
+
+<span class="kw">print</span> clients_menu, <span class="str">"out of "</span>, clients_menu_total, <span class="str">" works"</span>
+
+<span class="cmt">#this test assures that all the images in the resources menu exist.
+</span>
+<span class="kw">if</span> Screen.exists(<img src="RESOURCES.png" />):
+    Screen.<span class="skw">click</span> (<img src="RESOURCES.png" />)
+    <span class="kw">if</span> Screen.exists(<img src="ALLRESOURCES.png" />):
+        resources_menu = resources_menu + <span class="dig">1</span>
+        resources_menu_total = resources_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"All Resources"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"All Resources"</span> + notfound
+            resources_menu_total = resources_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="WHITEPAPERS.png" />):
+        resources_menu = resources_menu + <span class="dig">1</span>
+        resources_menu_total = resources_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"White papers"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"White papers"</span> + notfound
+            resources_menu_total = resources_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="WEBINARS-1.png" />):
+        resources_menu = resources_menu + <span class="dig">1</span>
+        resources_menu_total = resources_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Webinars"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Webinars"</span> + notfound
+            resources_menu_total = resources_menu_total + <span class="dig">1</span>
+            exit
+    <span class="kw">if</span> Screen.exists(<img src="EVENTS-1.png" />):
+        resources_menu = resources_menu + <span class="dig">1</span>
+        resources_menu_total = resources_menu_total + <span class="dig">1</span>
+        <span class="kw">print</span> <span class="str">"Events"</span> + found
+    <span class="kw">else</span>:
+            <span class="kw">print</span> <span class="str">"Events"</span> + notfound
+            resources_menu_total = resources_menu_total + <span class="dig">1</span>
+            exit
+
+<span class="kw">else</span>:
+    <span class="kw">print</span> <span class="str">"resources menu"</span> + notfound
+
+<span class="kw">print</span> resources_menu, <span class="str">"out of "</span>, resources_menu_total, <span class="str">" works"</span>
+</pre>
+</body>
+</html>
