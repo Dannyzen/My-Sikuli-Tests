@@ -1,0 +1,198 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Screen_Shotter-Good.sikuli</h2> <a href="Screen_Shotter-Good.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt">#bring in the OS module
+</span><span class="kw">import</span> os
+
+<span class="cmt">#Configs
+</span>Screen=Screen(<span class="dig">1</span>)<span class="cmt">#Change 1 to 0 if using only 1 monitor</span>
+
+<span class="cmt">#--Importer-- 
+</span>
+results = []
+my_file = file(<span class="str">"/users/dannyrosen/Desktop/test.txt"</span>, <span class="str">"r"</span>)
+<span class="kw">for</span> line <span class="kw">in</span> my_file:
+      results.append(line.replace(<span class="str">"\n"</span>, <span class="str">" "</span>))
+x = (len(results))
+
+
+<span class="kw">global</span> address
+<span class="kw">def</span> list():
+
+    results = []
+    my_file = file(<span class="str">"/users/dannyrosen/Desktop/test.txt"</span>, <span class="str">"r"</span>)
+    <span class="kw">for</span> line <span class="kw">in</span> my_file:
+      results.append(line.replace(<span class="str">"\n"</span>, <span class="str">" "</span>))
+
+    <span class="kw">for</span> i <span class="kw">in</span> range (len(results)):
+        address=(results[num])
+
+
+
+
+<span class="cmt">#--Counter--
+</span>num = int(<span class="dig">0</span>) <span class="cmt">#getting the starting number .</span>
+another_num = int(<span class="dig">1</span>)
+<span class="cmt">#create counter for going through the text list
+</span><span class="kw">def</span> count():
+    <span class="kw">global</span> another_num
+    <span class="kw">global</span> num
+    num = num + another_num <span class="cmt">#add the value to [num]</span>
+
+<span class="cmt">#get os type
+</span>myOS = Env.getOS()
+
+
+<span class="cmt">#assign dev url prefix
+</span>
+<span class="kw">def</span> fullscreen():
+    keyDown(Key.SHIFT+Key.CMD)
+    <span class="skw">type</span>(<span class="str">"f"</span>)<span class="cmt">#makes fullscreen</span>
+    keyUp(Key.SHIFT+Key.CMD)
+
+<span class="cmt">#Get the date
+</span><span class="kw">global</span> date
+date = os.popen(<span class="str">'date'</span>).read()
+
+
+<span class="cmt">#assign paths we're gonna make to dir_check variable (tested on mac)
+</span>myPath = os.path.dirname(getBundlePath())
+home = os.environ[<span class="str">'HOME'</span>]
+dir_check = os.path.exists(home + <span class="str">"/Desktop/Testing_Screenshots/"</span>)
+<span class="kw">print</span> dir_check
+<span class="kw">print</span> date
+<span class="cmt">#make directories 
+</span><span class="cmt">#if myOS == OS.MAC:
+</span><span class="cmt">#    if dir_check == 1:
+</span><span class="cmt">#        print "/Desktop/Testing_Screenshots exists" 
+</span>os.makedirs(home + <span class="str">"/Desktop/Testing_Screenshots/Firefox/"</span> + date)
+os.makedirs(home + <span class="str">"/Desktop/Testing_Screenshots/Chrome/"</span> + date)
+        <span class="cmt">#safari testing would go here
+</span><span class="cmt">#else:
+</span><span class="cmt">#    print "Sorry, not a Mac"
+</span>
+
+<span class="kw">def</span> firefox_cleanup():
+    <span class="kw">import</span> os
+    <span class="kw">global</span> date
+    <span class="kw">global</span> clean_date
+    date = os.popen(<span class="str">'date'</span>).read()
+<span class="cmt">#clean date because it has spaces and mv hates spaces
+</span>    clean_date = date.replace(<span class="str">" "</span>,<span class="str">"-"</span> )
+    home = os.environ[<span class="str">'HOME'</span>]
+    command_firefox = <span class="str">"mv"</span> + <span class="str">" "</span> + home + <span class="str">"/Desktop/Testing_Screenshots/"</span> + <span class="str">"*png"</span>+ <span class="str">" "</span> + home + <span class="str">"/Desktop/Testing_Screenshots/Firefox"</span> + clean_date
+
+    <span class="cmt">#os.popen(command_firefox)
+</span>
+<span class="kw">def</span> firefox():
+    openApp(<span class="str">"Firefox"</span>)
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+    <span class="skw">type</span>(<span class="str">"l"</span>, KEY_CMD) <span class="cmt"># switch to address field</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    paste(address)
+    <span class="skw">type</span>(Key.ENTER)
+    Screen.<span class="skw">wait</span>(<img src="BUDDYEEEMEDI-1.png" />, <span class="dig">15</span>)
+    run
+    fullscreen()
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.HOME)
+    Screen.<span class="skw">rightClick</span>(<img src="BUDDYEEEMEDI-1.png" />,<span class="dig">2</span>)
+    Screen.<span class="skw">click</span>(<img src="SavePageAsIm.png" />)
+    Screen.<span class="skw">click</span>(<img src="kSelectall.png" />)
+    Screen.<span class="skw">click</span>(<img src="Saveselectio.png" />)
+    <span class="cmt">#OS DEPENDENT *if mac*
+</span>    Screen.<span class="skw">click</span>(<img src="q.png" />)
+    <span class="skw">type</span>(<span class="str">"testing_screen"</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    Screen.<span class="skw">doubleClick</span>(<img src="Testing_Scre.png" />)
+    <span class="skw">type</span>(Key.TAB)
+    paste(address + <img src=".png" />)
+    Screen.<span class="skw">click</span>(<img src="1320856838917.png" />)
+
+
+
+
+    run
+    fullscreen()
+    run
+    count()
+
+<span class="kw">while</span> (num &lt; x):
+   run
+   list()
+   run
+   firefox()
+   run
+   firefox_cleanup()
+</pre>
+</body>
+</html>
